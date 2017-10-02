@@ -39,7 +39,7 @@ These are 32 by 32 images of 43 different classes of traffic signs.
 
 Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
 
-![alt text][writeup_images/dataset.jpg]
+[alt text][writeup_images/dataset_chart.jpg]
 
 ###Design and Test a Model Architecture
 
