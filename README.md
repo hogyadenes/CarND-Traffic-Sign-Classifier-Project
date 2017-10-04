@@ -22,11 +22,14 @@ Here is the link to my [project code](https://github.com/hogyadenes/CarND-Traffi
 #### 1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
 The provided dataset consists of the following data:
- Number of training examples = 34799
- Number of validating examples = 4410
- Number of testing examples = 12630
- Image data shape = (32, 32, 3)
- Number of classes = 43
+
+| Description         		|     Data	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| Number of training examples | 34799 |
+| Number of validating examples | 4410 |
+| Number of testing examples | 12630 |
+| Image data shape | (32, 32, 3) |
+| Number of classes | 43 |
  
 These are 32 by 32 images of 43 different classes of traffic signs. 
 
