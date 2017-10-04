@@ -64,7 +64,7 @@ My final model consisted of the following layers:
 
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x1 RGB image   							| 
+| Input         		| 32x32x1 grayscale image   							| 
 | Convolution 3x3     	| 1x1 stride, valid padding, outputs 28x28x24 	|
 | RELU					|												|
 | Max pooling	      	| 2x2 stride,  outputs 14x14x24 	- also tried avg_pooling but	these gave better results		|
@@ -86,26 +86,47 @@ To train the model, I used an Adam optimizer with a learning rate of 0.001, a ba
 ####4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
+* training set accuracy of 0.999
+* validation set accuracy of 0.975
+* test set accuracy of 0.966
 
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
+  I tried the original LeNet with unmodified inputs and parameter count. Then I normalized the data and augmented it (but still with the same network size). These gave me about 0.94 accuracy on the validation set but worked quite badly on some of my own test images. Then I tried to iteratively increase the size of each layers. I also changed the training hyperparameters a lot (increasing/decreasing the learning rate, epoch count and batch size - for the batch size I chose the biggest possible that my system could handle). 
 * What were some problems with the initial architecture?
+  
+  The input was not normalized and the training set was not big enough to handle even the slightest variation of rotation/or translation of the signs (especially on underrepresented images). There were also not enough trainable parameters (especially in the fully connected layers). I also tried different pooling versions (avg_pooling and also mixed) but at the end I returned to max pooling because this gave me more consistent results.
+  
 * How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
+
+  I tried not to increase to network size first because in my experience very large networks tend to learn the training set easily but handle the real world problems worse especially if the training set is not big enough. So I initially kept the network size on the low end and also applied a dropout with a keep_rate of 0.5 during training. This proves that overfitting was my primary concern here while it was plain clear at the beginning that the network is not capable to learn the task with so few training parameters. So after all that I increased the size of each layer in small steps. 
+  My approach delivers quite similar results on the validation and test sets and also gave a 100 percent accuracy on the random internet images so I am relatively content that it is an acceptable solution.
+  
 * Which parameters were tuned? How were they adjusted and why?
+
+  I tuned the learning rate, the batch size and epoch count many times. I also played with the dropout parameter.
+
 * What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+
+   Convolution layers work well because the many signs have similar shapes/and forms and it also helps the keep the training parameters low. The dropout helped considerable during training because it helped to limit overfitting by forcing the network to keep redundancies.
 
 If a well known architecture was chosen:
 * What architecture was chosen?
+  
+  The architecture was a modification of the LeNet architecture
+  
 * Why did you believe it would be relevant to the traffic sign application?
+
+  It was recommended to try so I gave it shot and it proved to be really good for this task. It is also an easy to undestand and well documented structure with many real-world applications.
+ 
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
+
+  The model delivers similar and high accuracy on all three kind of sets as well as on my chosen test images.
  
 
-###Test a Model on New Images
+### Test a Model on New Images
 
-####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
+#### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
 Here are five German traffic signs that I found on the web:
 
