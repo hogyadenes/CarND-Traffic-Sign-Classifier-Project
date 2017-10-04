@@ -36,30 +36,25 @@ These are 32 by 32 images of 43 different classes of traffic signs.
 
 #### 2. Include an exploratory visualization of the dataset.
 
+Here is an exploratory visualization of the data set. This bar chart showing how the traffic sign classes are distibuted inside each set. There are traffic signs with high sample count and there are also types that are relatively underrepresented. But at least the distibution is similar across the sets.
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+![Bar chart - distribution](writeup_images/dataset_chart.jpg)
 
-![alt text][writeup_images/dataset.jpg]
+### Design and Test a Model Architecture
 
-###Design and Test a Model Architecture
+#### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
 
-####1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
+As a first step, I decided to convert the images to grayscale. This makes the normalization easier and makes the training faster by considerably decreasing the input dimension.
 
-As a first step, I decided to convert the images to grayscale because ...
+Here is an example of a traffic sign image before and after grayscaling and normalizing
 
-Here is an example of a traffic sign image before and after grayscaling.
+![Example image](writeup_images/image_norm.jpg)
 
-![alt text][image2]
-
-As a last step, I normalized the image data because ...
-
-I decided to generate additional data because ... 
-
-To add more data to the the data set, I used the following techniques because ... 
+I also generated additional data by making small transformations (rotation and translation) on the original images. This helps the trained network to better classify badly cropped or misaligned traffic signs. 
 
 Here is an example of an original image and an augmented image:
 
-![alt text][image3]
+![alt text](writeup_images/augmentation.jpg)
 
 The difference between the original data set and the augmented data set is the following ... 
 
