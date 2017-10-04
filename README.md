@@ -52,34 +52,36 @@ Here is an example of a traffic sign image before and after grayscaling and norm
 
 I also generated additional data by making small transformations (rotation and translation) on the original images. This helps the trained network to better classify badly cropped or misaligned traffic signs. 
 
-Here is an example of an original image and an augmented image:
+Here is an example of an original image and some augmented images:
 
 ![alt text](writeup_images/augmentation.jpg)
+ 
 
-The difference between the original data set and the augmented data set is the following ... 
 
-
-####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
+#### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
 My final model consisted of the following layers:
 
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
+| Input         		| 32x32x1 RGB image   							| 
+| Convolution 3x3     	| 1x1 stride, valid padding, outputs 28x28x24 	|
 | RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
-|						|												|
-|						|												|
+| Max pooling	      	| 2x2 stride,  outputs 14x14x24 	- also tried avg_pooling but	these gave better results		|
+| Convolution 3x3	    | 1x1 stride, valid padding, outputs 10x10x48  |
+| RELU					|												|
+| Max pooling	      	| 2x2 stride,  outputs 5x5x48 				|
+| Fully connected		| Flattened input with 1200 inputs, outputs 300								|
+| RELU					|												|
+| Fully connected		|  300 inputs, outputs 120								|
+| RELU					|												|
+| Output layer				| 120 inputs, 43 outputs        									|
  
+This means I increased the network size and the training parameters considerably but also tried to keep it relatively manageable. 
 
+#### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-####3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
-
-To train the model, I used an ....
+To train the model, I used an Adam optimizer with a learning rate of 0.001, a batch size of 512 and 10 epochs. I tried not to overtrain the network and it seemed that the accuracy peaked after 10 epochs and the validation accuracy started to deteriorate.
 
 ####4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
